@@ -25,8 +25,10 @@ def get_relevant_answers(prompt):
                         """,
                         (query_embedding, query_embedding))
             rows = cur.fetchall()
+            for row in rows:
+                print(f"{row['distance']}\n{row['a']}\n---\n")
             relevant_answers = [x['a'] for x in rows]
-            print(f"Relevant Answers: {relevant_answers}", end='\n---\n')
+            # print(f"Relevant Answers: {relevant_answers}", end='\n---\n')
     return relevant_answers
 
 # Initialize Ollama models
