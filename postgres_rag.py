@@ -6,10 +6,12 @@ from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
 import os
 
+# Load environment variables
 load_dotenv()
-
+# Load connection string for Neon server
 conn_str = os.getenv('NEON_CONN_STR')
 
+# Function for retrieving relevant answers from the database
 def get_relevant_answers(prompt):
     with psycopg2.connect(conn_str) as conn:
         with conn.cursor(cursor_factory=RealDictCursor) as cur:

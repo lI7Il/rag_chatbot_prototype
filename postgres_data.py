@@ -3,12 +3,15 @@ from langchain_ollama.embeddings import OllamaEmbeddings
 from dotenv import load_dotenv
 import os
 
+# Load environment variables
 load_dotenv()
-
+# Load connection string for Neon server
 conn_str = os.getenv('NEON_CONN_STR')
 
+# Embedding model
 ollama_embeddings_1024 = OllamaEmbeddings(model="embedding-cpu")
 
+# Generated Q&A about an imaginary planet
 planet_qa = {
     "What is the name of the planet?": "The planet is called Zephyra.",
     "Where is Zephyra located?": "It orbits a binary star system in the Andorian sector.",
@@ -32,6 +35,7 @@ planet_qa = {
     "What is the cultural belief of the Zephyrians?": "They believe every living thing shares a single ‘breath of starlight,’ uniting all life."
 }
 
+# Establish a connection, create a table, then insert data into it
 with psycopg2.connect(conn_str) as conn:
     with conn.cursor() as cur:
         cur.execute("""CREATE TABLE IF NOT EXISTS qa (
